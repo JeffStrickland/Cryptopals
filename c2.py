@@ -10,7 +10,6 @@ If your function works properly, then when you feed it the string:
 746865206b696420646f6e277420706c6179  
 '''
 
-import codecs
 from binascii import unhexlify, hexlify
 
 # Pass a into your function & after hex decoding, XOR against b
