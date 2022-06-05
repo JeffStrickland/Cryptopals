@@ -54,6 +54,10 @@ def hamming_distance_strings(a, b):
     x = distance.hamming(a.decode(), b.decode()) 
     return x
 
+def hamming_distance_strings(a, b):
+    x = distance.hamming(a.decode(), b.decode()) 
+    return x
+'''
 # Breakdown of the above built in function:
 def hamming_distance(string1, string2):
 	dist_counter = 0
@@ -108,6 +112,17 @@ def decryption(byteslist):
         distances = []
         text_chunks = [byteslist[i:i+keysize]for i in range(0, len(byteslist), keysize)]
         while True:
+'''
+# Test of 2 function above
+#print(hamming_distance_strings(byteslist[1], byteslist[5]))
+#print(hamming_distance(byteslist[1], byteslist[5]))
+
+def decryption(byteslist):
+    av_hamming_distances = []
+    for key in range(2, 41):
+        distances = []
+        text_chunks = [byteslist.decode()[i:i+key]for i in range(0, len(byteslist.decode()), key)]
+        while true:
             try:
                 text_chunk1 = text_chunks[0]
                 text_chunk2 = text_chunks[1]
@@ -152,4 +167,9 @@ Traceback (most recent call last):
   File "/Users/computer/Desktop/GitHub/Cryptopals/c6.py", line 120, in decryption
     'avg distance': sum(distances) / len(distances)
 ZeroDivisionError: division by zero
+
+'''
+if __name__ == '__main__':
+    file_path = 'Desktop/GitHub/Cryptopals/6.txt'
+    main()
 '''
