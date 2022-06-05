@@ -1,4 +1,6 @@
 '''
+CRYPTOPALS CHALLENGE 6
+
 Break repeating-key XOR
 It is officially on, now.
 

@@ -1,4 +1,6 @@
 '''
+CRYPTOPALS CHALLENGE 4
+
 Detect single-character XOR
 
 One of the 60-character strings in this file has been encrypted by single-character XOR.

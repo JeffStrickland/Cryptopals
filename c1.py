@@ -1,5 +1,5 @@
 '''
-Cryptopals Set 1 Challenge 1:  
+CRYPTOPALS CHALLENGE 1  
 
 Convert hex to base64
 Always operate on raw bytes, never on encoded strings.
