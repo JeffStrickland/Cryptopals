@@ -17,7 +17,6 @@ You can obviously decrypt this using the OpenSSL command-line tool, but we're ha
 	
 from Crypto.Cipher import AES
 import base64
-import numpy as np
 
 # If your key is encoded in any manner, decode to bytes
 key = "YELLOW SUBMARINE"
@@ -25,24 +24,32 @@ key = "YELLOW SUBMARINE"
 # Preserve your master encrypted file
 # Create new file
 # Fill it with the encrypted text decoded to bytes
-def text_bytes(file):
-    f = open(f'Decrypted{file}', 'x')
+'''def base64_bytes(file):
+    f = open(f'Decrypted{file}', 'x') # Create new file
     encrypted = file
     decrypted = (f'Decrypted{file}')
-    with open(encrypted, 'r') as f1, open(decrypted, 'w') as f2:
+    with open(encrypted, 'r') as f1, open(decrypted, 'a') as f2: # Open both files
         x = f1.readlines()
-        y = [(base64.b64decode(i)) for i in x]
-        y = [i.strip() for i in x]
-        for i in y: f2.writelines(y)
-        #f2.writelines(y)
-        #for i in y: f2.writelines(i)
-        
-        
-       
+        y = [(base64.b64decode(i)) for i in x] # Decode base64 to bytes
+        for i in y:                            # Write decoded strings to new file
+            f2.write(str(i))
+            f2.write('\n')
+'''
+# It works, don't screw it up
+def base64_bytes(file):
+    encrypted = file
+    with open(encrypted, 'r') as f1:
+        x = f1.readlines()
+    y = [(base64.b64decode(i)) for i in x] 
+    return y   
 
-
-text_bytes('7.txt')
-
-#decipher = AES.new(key, AES.MODE_ECB)
-#x = text_bytes('7.txt')
+decipher = AES.new(key, AES.MODE_ECB)
+x = base64_bytes('7.txt')
+y = [(len(i) for i in x)]
+print(y)
 #print(decipher.decrypt(x))
+
+#z =[decipher.decrypt(i) for i in x]
+#z = z[0: len(z)//16]
+#print(z)
+
