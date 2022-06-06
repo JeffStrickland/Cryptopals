@@ -32,8 +32,10 @@ def main(): # Read encrypted file, decrypt with decryption function, write decry
     key = b"YELLOW SUBMARINE" # given
     with open("7.txt") as f1, open('decrypted', 'w') as f2:
         data = base64.b64decode(f1.read())
-        f2.write(decrypt_function(data, key).decode()) # Writing decrpted data to new file is more 
-                                                       # practical than printing in the terminal
+        z = decrypt_function(data, key).decode()
+        f2.write(z)
+    # Writing decrpted data to new file is more 
+    # practical than printing in the terminal
 
 if __name__ == '__main__':
     main()
@@ -122,42 +124,3 @@ Play that funky music A little louder now
 Play that funky music, white boy Come on, Come on, Come on 
 Play that funky music 
 '''
-	
-from Crypto.Cipher import AES
-import base64
-
-# If your key is encoded in any manner, decode to bytes
-key = "YELLOW SUBMARINE"
-
-# Preserve your master encrypted file
-# Create new file
-# Fill it with the encrypted text decoded to bytes
-'''def base64_bytes(file):
-    f = open(f'Decrypted{file}', 'x') # Create new file
-    encrypted = file
-    decrypted = (f'Decrypted{file}')
-    with open(encrypted, 'r') as f1, open(decrypted, 'a') as f2: # Open both files
-        x = f1.readlines()
-        y = [(base64.b64decode(i)) for i in x] # Decode base64 to bytes
-        for i in y:                            # Write decoded strings to new file
-            f2.write(str(i))
-            f2.write('\n')
-'''
-# It works, don't screw it up
-def base64_bytes(file):
-    encrypted = file
-    with open(encrypted, 'r') as f1:
-        x = f1.readlines()
-    y = [(base64.b64decode(i)) for i in x] 
-    return y   
-
-decipher = AES.new(key, AES.MODE_ECB)
-x = base64_bytes('7.txt')
-y = [(len(i) for i in x)]
-print(y)
-#print(decipher.decrypt(x))
-
-#z =[decipher.decrypt(i) for i in x]
-#z = z[0: len(z)//16]
-#print(z)
-
