@@ -34,18 +34,30 @@ No, that's not a mistake.
 
 We get more tech support questions for this challenge than any of the other ones. We promise, there aren't any blatant errors in this text. In particular: the "wokka wokka!!!" edit distance really is 37.
 '''
+import base64
 
-from operator import xor
-from base64 import b64decode
 
-def hamming_distance(given_string1, given_string2): # Number of differing bits between strings
-    differing_bits = 0
-    for byte in xor(given_string1, given_string2):
-        differing_bits += bin(byte).count("1")
-    return differing_bits
+a = b'this is a test'
+b = b'wokka wokka!!!'
 
-given_string1 = ("this is a test").
-given_string2 = ("wokka wokka!!!")
+def hamming_distance(a, b):
+    distance = 0
+    for z in zip(a, b):
+        x = z[0] ^ z[1]
+        bits = 0
+        while (x >0):
+            bits += x & 1;
+            x >>=1;
+        distance += bits
+    return distance
+# This should return 37
+# print(hamming_distance(a, b))
+# SOLUTION --> 37, it works
 
-print(hamming_distance(given_string1, given_string2))
+# Guessed length of key between 2 - 40
+def key_size(): 
+    start = 2
+    end = 41
+    return list(range(start, end))
+
 
