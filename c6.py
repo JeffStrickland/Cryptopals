@@ -35,7 +35,8 @@ No, that's not a mistake.
 We get more tech support questions for this challenge than any of the other ones. We promise, there aren't any blatant errors in this text. In particular: the "wokka wokka!!!" edit distance really is 37.
 '''
 import base64
-
+from binascii import unhexlify, b2a_base64, a2b_base64, hexlify
+import re
 
 a = b'this is a test'
 b = b'wokka wokka!!!'
@@ -54,10 +55,53 @@ def hamming_distance(a, b):
 # print(hamming_distance(a, b))
 # SOLUTION --> 37, it works
 
-# Guessed length of key between 2 - 40
-def key_size(): 
-    start = 2
-    end = 41
-    return list(range(start, end))
+# Test key sizes in range from 2-40
+def key_size(text):
+    byte_string = b''.join([a2b_base64(line.strip()) for line in open(text).readlines()])
+    keysize_distances = []
+    for keysize in range(2, 40):
+        blocks = [byte_string[i * keysize: (i + 1) * keysize] for i in range(4)]
+        distances = [hamming_distance(blocks[i], blocks[j]) for i in range(len(blocks)-1) for j in range(1, len(blocks))]
+        distance = sum(distances) / len(distances)
+        distance /= keysize
+        keysize_distances.append((keysize, distance))
+    keysize = sorted(keysize_distances, key=lambda x: x[1])[0][0]
+    return keysize
 
+# print(key_size('6.txt'))
+# SOLUTION --> 29
 
+# Re-used from challenge 3
+def single_xor(x):
+    strings = (''.join(chr(num ^ key) for num in x) for key in range(256)) # Scoring for character frequency to find key
+    return (max(strings, key = lambda s: s.count(' ')))
+'''
+# Re-used from challenge 4
+def evaluate_file(f):    
+    
+    #y = [i.strip() for i in templist]
+    #x = [unhexlify(i) for i in y]
+    z = single_xor(f)
+    for i in z:
+        if bool(re.match('[a-zA-Z\s]+$', i)) == True:
+            return(i)
+        else:
+            pass
+'''
+
+# Split text into blocks equal to keysize 
+def find_the_key():
+    k = key_size('6.txt')
+    byte_string = b''.join([a2b_base64(line.strip()) for line in open('6.txt').readlines()])
+    byte_blocks = [byte_string[i * k: (i + 1) * k] for i in range(int(len(byte_string) / k))]
+    transposed_blocks = [bytearray([b[i] for b in byte_blocks]) for i in range(k)]
+    keys = []
+    for block in transposed_blocks:
+        _, _, index = single_xor(block)
+        keys.append(index)
+    key = bytearray(keys)
+    return key
+
+print(find_the_key())
+
+bytes_to_str(detect)

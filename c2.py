@@ -14,7 +14,6 @@ If your function works properly, then when you feed it the string:
 
 from binascii import unhexlify, hexlify
 
-# Pass a into your function & after hex decoding, XOR against b
 a = '1c0111001f010100061a024b53535009181c'
 b =  '686974207468652062756c6c277320657965'
 
