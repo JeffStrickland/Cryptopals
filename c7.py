@@ -21,7 +21,7 @@ import base64
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 
-def decrypt_function(dcfile, key): # Function decrypts data
+def ecb_decrypt_function(dcfile, key): # Function decrypts data
     cipher = Cipher(algorithms.AES(key), modes.ECB(), default_backend())
     decryptor = cipher.decryptor()
     decrypted_data =  decryptor.update(dcfile) + decryptor.finalize()
@@ -32,7 +32,7 @@ def main(): # Read encrypted file, decrypt with decryption function, write decry
     key = b"YELLOW SUBMARINE" # given
     with open("7.txt") as f1, open('decrypted', 'w') as f2:
         data = base64.b64decode(f1.read())
-        z = decrypt_function(data, key).decode()
+        z = ecb_decrypt_function(data, key).decode()
         f2.write(z)
     # Writing decrpted data to new file is more 
     # practical than printing in the terminal

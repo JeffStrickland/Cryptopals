@@ -16,4 +16,14 @@ So: pad any block to a specific block length, by appending the number of bytes o
 "YELLOW SUBMARINE\x04\x04\x04\x04"
 '''
 
+x = b'YELLOW SUBMARINE'
+def pkcs_padding(text, block_size):
+    length_of_padding = block_size - (len(text) % block_size)
+    if length_of_padding == 0:
+        length_of_padding = block_size
+    padding = bytes([length_of_padding]) * length_of_padding
+    return text + padding
 
+# Test it out
+print(pkcs_padding(x, 20))
+# SOLUTION --> b'YELLOW SUBMARINE\x04\x04\x04\x04'
