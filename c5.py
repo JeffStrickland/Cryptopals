@@ -19,7 +19,7 @@ a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f
 '''
 
 # Function encrypts text with key provided using method: repeating XOR
-def repeating_key_xor(text, key):
+def encrypt_repeating_key_xor(text, key):
     xor_encoded = []
     for i in range(0, len(text)):
         xor_encoded.append(text[i] ^ key[i % (len(key))])
@@ -29,7 +29,7 @@ def repeating_key_xor(text, key):
 def main():
     text = bytes("Burning 'em, if you ain't quick and nimble I go crazy when I hear a cymbal", "UTF-8")
     key = bytes("ICE", "UTF-8")
-    print(f'SOLUTION --> {(repeating_key_xor(text, key)).hex()}')
+    print(f'SOLUTION --> {(encrypt_repeating_key_xor(text, key)).hex()}')
 
 if __name__ == '__main__':
     main()
