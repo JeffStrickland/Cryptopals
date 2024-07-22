@@ -9,7 +9,6 @@ Should produce:
 SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t
 '''
 
-''' Flow: Convert string to bytes -> Convert bytes to base64'''
 
 import codecs
 from binascii import unhexlify
